@@ -1,0 +1,7 @@
+jdbcUrl=jdbc:postgresql://localhost:5432/hibernatedb
+username=postgres
+password=postgrespassword
+connectionTestQuery=SELECT 1
+dataSource.cachePrepStmts=true
+dataSource.prepStmtCacheSize=250
+dataSource.prepStmtCacheSqlLimit=2048

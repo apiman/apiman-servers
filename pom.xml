@@ -4,7 +4,7 @@
 
   <groupId>io.apiman</groupId>
   <artifactId>apiman-servers</artifactId>
-  <version>1.1.5-SNAPSHOT</version>
+  <version>1.1.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>apiman-servers</name>
 
@@ -42,6 +42,8 @@
 
     <maven.compiler.target>1.7</maven.compiler.target>
     <maven.compiler.source>1.7</maven.compiler.source>
+    
+    <version.apiman>1.1.5.Final</version.apiman>
 
     <!-- Plugin Versions -->
     <version.antrun.plugin>1.7</version.antrun.plugin>
@@ -77,12 +79,12 @@
       <dependency>
         <groupId>io.apiman</groupId>
         <artifactId>apiman-manager-api-micro</artifactId>
-        <version>${project.version}</version>
+        <version>${version.apiman}</version>
       </dependency>
       <dependency>
         <groupId>io.apiman</groupId>
         <artifactId>apiman-gateway-platforms-war-micro</artifactId>
-        <version>${project.version}</version>
+        <version>${version.apiman}</version>
       </dependency>
 
       <!-- Third Party Deps -->
@@ -90,6 +92,11 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>5.1.36</version>
+      </dependency>
+      <dependency>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.1-901-1.jdbc4</version>
       </dependency>
       <dependency>
         <groupId>com.zaxxer</groupId>
@@ -360,5 +367,6 @@
   <modules>
     <module>manager-mysql</module>
     <module>gateway-es</module>
+    <module>manager-postgres</module>
   </modules>
 </project>
