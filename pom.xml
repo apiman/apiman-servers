@@ -365,8 +365,9 @@
   </pluginRepositories>
 
   <modules>
-    <module>manager-mysql</module>
     <module>gateway-es</module>
+    <module>manager-es</module>
+    <module>manager-mysql</module>
     <module>manager-postgres</module>
   </modules>
 </project>
