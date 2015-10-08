@@ -1,4 +1,4 @@
-jdbcUrl=jdbc:postgresql://localhost:5432/hibernatedb
+jdbcUrl=jdbc:postgresql://localhost:5432/apiman
 username=postgres
 password=postgrespassword
 connectionTestQuery=SELECT 1
