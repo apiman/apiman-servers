@@ -27,6 +27,7 @@
   </dependencies>
 
   <build>
+    <finalName>apiman-gateway-es</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

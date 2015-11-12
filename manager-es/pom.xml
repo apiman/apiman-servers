@@ -15,6 +15,7 @@
   </dependencies>
   
   <build>
+    <finalName>apiman-manager-es</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

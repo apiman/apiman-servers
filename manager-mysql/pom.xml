@@ -23,6 +23,7 @@
   </dependencies>
   
   <build>
+    <finalName>apiman-manager-mysql</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -29,5 +29,12 @@ this project into your IDE and running it from there.
 mvn exec:java -Dexec.mainClass="io.apiman.servers.gateway_es.Starter"
 ```
 
+### From the built artifact
+Once built and packaged via maven, you can run the resulting artifact as an executable JAR:
+
+```
+java -jar apiman-gateway-es.jar
+```
+
 ### From IDE
 We leave this as an exercise to the reader. :)

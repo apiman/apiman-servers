@@ -41,6 +41,13 @@ this project into your IDE and running it from there.
 mvn exec:java -Dexec.mainClass="io.apiman.servers.manager_h2.Starter"
 ```
 
+### From the built artifact
+Once built and packaged via maven, you can run the resulting artifact as an executable JAR:
+
+```
+java -jar apiman-manager-h2.jar
+```
+
 ### From IDE
 We leave this as an exercise to the reader. :)
 
