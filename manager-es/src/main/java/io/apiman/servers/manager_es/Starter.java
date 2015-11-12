@@ -18,7 +18,7 @@ package io.apiman.servers.manager_es;
 import io.apiman.manager.api.micro.ManagerApiMicroService;
 import io.apiman.manager.api.micro.Users;
 
-import java.io.File;
+import java.net.URL;
 
 /**
  * Starts up the API Manager.
@@ -29,8 +29,14 @@ import java.io.File;
 public class Starter {
 
     public static void main(String [] args) throws Exception {
-        System.setProperty("apiman.micro.manager.properties-url", new File("src/main/resources/manager_es-apiman.properties").toURI().toString());
-        System.setProperty(Users.USERS_FILE_PROP, "src/main/resources/users.list");
+        URL propsRes = Starter.class.getClassLoader().getResource("manager_es-apiman.properties"); //$NON-NLS-1$
+        if (propsRes != null) {
+            System.setProperty("apiman.micro.manager.properties-url", propsRes.toString());
+        }
+        URL usersRes = Starter.class.getClassLoader().getResource("users.list"); //$NON-NLS-1$
+        if (usersRes != null) {
+            System.setProperty(Users.USERS_FILE_PROP, usersRes.toString());
+        }
 
         ManagerApiMicroService micro = new ManagerApiMicroService() {
             @Override

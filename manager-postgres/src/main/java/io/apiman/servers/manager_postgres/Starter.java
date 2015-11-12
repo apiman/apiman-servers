@@ -18,7 +18,7 @@ package io.apiman.servers.manager_postgres;
 import io.apiman.manager.api.micro.ManagerApiMicroService;
 import io.apiman.manager.api.micro.Users;
 
-import java.io.File;
+import java.net.URL;
 
 import javax.naming.InitialContext;
 import javax.naming.NameAlreadyBoundException;
@@ -38,8 +38,14 @@ public class Starter {
     public static void main(String [] args) throws Exception {
         createDataSource();
 
-        System.setProperty("apiman.micro.manager.properties-url", new File("src/main/resources/manager_postgres-apiman.properties").toURI().toString());
-        System.setProperty(Users.USERS_FILE_PROP, "src/main/resources/users.list");
+        URL propsRes = Starter.class.getClassLoader().getResource("manager_postgres-apiman.properties"); //$NON-NLS-1$
+        if (propsRes != null) {
+            System.setProperty("apiman.micro.manager.properties-url", propsRes.toString());
+        }
+        URL usersRes = Starter.class.getClassLoader().getResource("users.list"); //$NON-NLS-1$
+        if (usersRes != null) {
+            System.setProperty(Users.USERS_FILE_PROP, usersRes.toString());
+        }
 
         ManagerApiMicroService micro = new ManagerApiMicroService() {
             @Override

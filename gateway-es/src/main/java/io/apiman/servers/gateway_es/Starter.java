@@ -18,10 +18,9 @@ package io.apiman.servers.gateway_es;
 import io.apiman.gateway.platforms.war.micro.GatewayMicroService;
 import io.apiman.gateway.platforms.war.micro.Users;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -39,8 +38,11 @@ public class Starter {
      * @throws Exception when any unhandled exception occurs
      */
     public static final void main(String [] args) throws Exception {
-        System.setProperty(Users.USERS_FILE_PROP, "src/main/resources/users.list"); //$NON-NLS-1$
-
+        URL resource = Starter.class.getClassLoader().getResource("users.list"); //$NON-NLS-1$
+        if (resource != null) {
+            System.setProperty(Users.USERS_FILE_PROP, resource.toString());
+        }
+        
         GatewayMicroService microService = new GatewayMicroService();
         loadProperties();
         microService.start();
@@ -52,13 +54,13 @@ public class Starter {
      */
     @SuppressWarnings({ "nls", "unchecked" })
     protected static void loadProperties() {
-        File f = new File("src/main/resources/gateway_es-apiman.properties");
-        if (!f.exists()) {
-            throw new RuntimeException("Failed to find properties file (see README.md): " + f);
+        URL configUrl = Starter.class.getClassLoader().getResource("gateway_es-apiman.properties");
+        if (configUrl == null) {
+            throw new RuntimeException("Failed to find properties file (see README.md): gateway_es-apiman.properties");
         }
         InputStream is = null;
         try {
-            is = new FileInputStream(f);
+            is = configUrl.openStream();
             Properties props = new Properties();
             props.load(is);
             Enumeration<String> names = (Enumeration<String>) props.propertyNames();

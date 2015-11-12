@@ -5,6 +5,12 @@ This is a microservice for the apiman API Manager that stores data in an
 elasticsearch instance.  The elasticsearch instance must be running externally
 in some location (by default on localhost:9200).
 
+## Requirements
+You must have an instance of Elasticsearch already running, and it must version 1.x (for 
+example, 1.7.2).  We do not yet support ES 2.x.
+
+Download ES 1.7.2 here:  https://www.elastic.co/downloads/past-releases/elasticsearch-1-7-2
+
 ## Usage
 Make a copy of all `*-SAMPLE` files found in `src/main/resources`.  Use
 the appropriate names by dropping the `-SAMPLE` from the filename.  You should

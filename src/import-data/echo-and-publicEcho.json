@@ -1,0 +1,719 @@
+{
+  "Metadata" : {
+    "exportedOn" : 1446499173075,
+    "apimanVersion" : "1.2.0-SNAPSHOT"
+  },
+  "Users" : [ {
+    "username" : "admin",
+    "fullName" : "admin",
+    "email" : "admin@example.org",
+    "joinedOn" : 1446497560853,
+    "admin" : false
+  } ],
+  "Gateways" : [ {
+    "id" : "TheGateway",
+    "name" : "The Gateway",
+    "createdBy" : "admin",
+    "createdOn" : 1446498221897,
+    "modifiedBy" : "admin",
+    "modifiedOn" : 1446498221897,
+    "type" : "REST",
+    "configuration" : "{\"endpoint\":\"http://localhost:7777/api\",\"username\":\"admin\",\"password\":\"$CRYPT::Jvkgg2eXYVcy79Iw4buwAQ==\"}"
+  } ],
+  "Plugins" : [ {
+    "id" : 1446498244145100,
+    "groupId" : "io.apiman.plugins",
+    "artifactId" : "apiman-plugins-transformation-policy",
+    "version" : "1.2.0.Beta2",
+    "name" : "Transformation Policy Plugin",
+    "description" : "This plugin provides a very simple policy which can transform the request and/or response payload between XML and JSON.",
+    "createdBy" : "admin",
+    "createdOn" : 1446498244116,
+    "deleted" : false
+  } ],
+  "Roles" : [ {
+    "id" : "Owner",
+    "name" : "Owner",
+    "createdBy" : "admin",
+    "createdOn" : 1446498182157,
+    "autoGrant" : true,
+    "permissions" : [ "svcAdmin", "svcEdit", "orgAdmin", "planView", "appAdmin", "appEdit", "planAdmin", "orgEdit", "planEdit", "svcView", "appView", "orgView" ]
+  } ],
+  "PolicyDefinitions" : [ {
+    "id" : "RateLimitingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.RateLimitingPolicy",
+    "name" : "Rate Limiting Policy",
+    "description" : "Enforces rate configurable request rate limits on a service.  This ensures that consumers can't overload a service with too many requests.",
+    "icon" : "tachometer",
+    "templates" : [ {
+      "template" : "Consumers are limited to @{limit} requests per @{granularity} per @{period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "QuotaPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.QuotaPolicy",
+    "name" : "Quota Policy",
+    "description" : "Provides a way to limit the total number of requests that can be sent to an API.",
+    "icon" : "exchange",
+    "templates" : [ {
+      "template" : "Consumers cannot exceed their quota of @{limit} requests per @{granularity} per @{period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IgnoredResourcesPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IgnoredResourcesPolicy",
+    "name" : "Ignored Resources Policy",
+    "description" : "Requests satisfying the provided regular expression will be ignored.",
+    "icon" : "eye-slash",
+    "templates" : [ {
+      "template" : "Requests matching any of the @{pathsToIgnore.size()} regular expressions provided will receive a 404 error code."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IPWhitelistPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IPWhitelistPolicy",
+    "name" : "IP Whitelist Policy",
+    "description" : "Only requests that originate from a specified set of valid IP addresses will be allowed through.",
+    "icon" : "thumbs-up",
+    "templates" : [ {
+      "template" : "Only requests that originate from the set of @{ipList.size()} configured IP address(es) will be allowed to invoke the managed service."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "TransferQuotaPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.TransferQuotaPolicy",
+    "name" : "Transfer Quota Policy",
+    "description" : "Provides a way to limit the total number of bytes that can be transferred from (or to) an API.",
+    "icon" : "download",
+    "templates" : [ {
+      "template" : "Consumers are limited to transferring @{limit} bytes per @{granularity} per @{period}."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "IPBlacklistPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.IPBlacklistPolicy",
+    "name" : "IP Blacklist Policy",
+    "description" : "Requests that originate from a specified set of valid IP addresses will be denied access.",
+    "icon" : "thumbs-down",
+    "templates" : [ {
+      "template" : "Requests that originate from the set of @{ipList.size()} configured IP address(es) will be denied access to the managed service."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "CachingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.CachingPolicy",
+    "name" : "Caching Policy",
+    "description" : "Allows caching of API responses in the Gateway to reduce overall traffic to the back-end API.",
+    "icon" : "hdd-o",
+    "templates" : [ {
+      "template" : "API responses will be cached for @{ttl} seconds."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "URLRewritingPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.URLRewritingPolicy",
+    "name" : "URL Rewriting Policy",
+    "description" : "Responses from the back-end API will be modified by fixing up any incorrect URLs found with modified ones.  This is useful because apiman works through an API Gateway.",
+    "icon" : "pencil-square",
+    "templates" : [ {
+      "template" : "Responses will be modified by finding all text matching regular expression '@{fromRegex}' with '@{toReplacement}'."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "transformation-policy",
+    "policyImpl" : "plugin:io.apiman.plugins:apiman-plugins-transformation-policy:1.2.0.Beta2:war/io.apiman.plugins.transformation_policy.TransformationPolicy",
+    "name" : "Transformation Policy",
+    "description" : "Transforms the data from one format to another.",
+    "icon" : "adjust",
+    "templates" : [ ],
+    "pluginId" : 1446498244145100,
+    "formType" : "JsonSchema",
+    "form" : "schemas/transformation-policyDef.schema",
+    "deleted" : false
+  }, {
+    "id" : "BASICAuthenticationPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.BasicAuthenticationPolicy",
+    "name" : "BASIC Authentication Policy",
+    "description" : "Enables HTTP BASIC Authentication on a service.  Some configuration required.",
+    "icon" : "lock",
+    "templates" : [ {
+      "template" : "Access to the service is protected by BASIC Authentication through the '@{realm}' authentication realm.  @if{forwardIdentityHttpHeader != null}Successfully authenticated requests will forward the authenticated identity to the back end service via the '@{forwardIdentityHttpHeader}' custom HTTP header.@end{}"
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  }, {
+    "id" : "AuthorizationPolicy",
+    "policyImpl" : "class:io.apiman.gateway.engine.policies.AuthorizationPolicy",
+    "name" : "Authorization Policy",
+    "description" : "Enables fine grained authorization to API resources based on authenticated user roles.",
+    "icon" : "users",
+    "templates" : [ {
+      "template" : "Appropriate authorization roles are required.  There are @{rules.size()} authorization rules defined."
+    } ],
+    "formType" : "Default",
+    "deleted" : false
+  } ],
+  "Orgs" : [ {
+    "OrganizationBean" : {
+      "id" : "Test",
+      "name" : "Test",
+      "createdBy" : "admin",
+      "createdOn" : 1446498315948,
+      "modifiedBy" : "admin",
+      "modifiedOn" : 1446498315948
+    },
+    "Memberships" : [ {
+      "id" : 1446499003690131,
+      "userId" : "admin",
+      "roleId" : "Owner",
+      "organizationId" : "Test",
+      "createdOn" : 1446499003687
+    } ],
+    "Plans" : [ {
+      "PlanBean" : {
+        "id" : "Gold",
+        "name" : "Gold",
+        "createdBy" : "admin",
+        "createdOn" : 1446498379717
+      },
+      "Versions" : [ {
+        "PlanVersionBean" : {
+          "status" : "Locked",
+          "version" : "1.0",
+          "createdBy" : "admin",
+          "createdOn" : 1446498379746,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498379746,
+          "lockedOn" : 1446498390249
+        },
+        "Policies" : [ {
+          "id" : 1446498389040114,
+          "type" : "Plan",
+          "organizationId" : "Test",
+          "entityId" : "Gold",
+          "entityVersion" : "1.0",
+          "name" : "Rate Limiting Policy",
+          "configuration" : "{\"limit\":100,\"granularity\":\"Application\",\"period\":\"Minute\"}",
+          "createdBy" : "admin",
+          "createdOn" : 1446498389034,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498389034,
+          "definition" : {
+            "id" : "RateLimitingPolicy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        } ]
+      } ]
+    }, {
+      "PlanBean" : {
+        "id" : "Silver",
+        "name" : "Silver",
+        "createdBy" : "admin",
+        "createdOn" : 1446498395091
+      },
+      "Versions" : [ {
+        "PlanVersionBean" : {
+          "status" : "Locked",
+          "version" : "1.0",
+          "createdBy" : "admin",
+          "createdOn" : 1446498395109,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498395109,
+          "lockedOn" : 1446498419610
+        },
+        "Policies" : [ {
+          "id" : 1446498414058119,
+          "type" : "Plan",
+          "organizationId" : "Test",
+          "entityId" : "Silver",
+          "entityVersion" : "1.0",
+          "name" : "Rate Limiting Policy",
+          "configuration" : "{\"limit\":10,\"granularity\":\"Application\",\"period\":\"Minute\"}",
+          "createdBy" : "admin",
+          "createdOn" : 1446498414054,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498414054,
+          "definition" : {
+            "id" : "RateLimitingPolicy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        } ]
+      } ]
+    } ],
+    "Services" : [ {
+      "ServiceBean" : {
+        "id" : "echo",
+        "name" : "echo",
+        "createdBy" : "admin",
+        "createdOn" : 1446498426065
+      },
+      "Versions" : [ {
+        "ServiceVersionBean" : {
+          "status" : "Published",
+          "endpoint" : "http://localhost:9999/echo",
+          "endpointType" : "rest",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicService" : false,
+          "plans" : [ {
+            "planId" : "Gold",
+            "version" : "1.0"
+          }, {
+            "planId" : "Silver",
+            "version" : "1.0"
+          } ],
+          "version" : "1.0",
+          "createdBy" : "admin",
+          "createdOn" : 1446498426091,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498589100,
+          "publishedOn" : 1446498613863
+        },
+        "Policies" : [ {
+          "id" : 1446498611321127,
+          "type" : "Service",
+          "organizationId" : "Test",
+          "entityId" : "echo",
+          "entityVersion" : "1.0",
+          "name" : "BASIC Authentication Policy",
+          "configuration" : "{\"realm\":\"Echo\",\"forwardIdentityHttpHeader\":\"X-Ident\",\"requireBasicAuth\":true,\"staticIdentity\":{\"identities\":[{\"username\":\"user\",\"password\":\"user\"}]}}",
+          "createdBy" : "admin",
+          "createdOn" : 1446498611317,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498611317,
+          "definition" : {
+            "id" : "BASICAuthenticationPolicy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        } ]
+      } ]
+    }, {
+      "ServiceBean" : {
+        "id" : "public-echo",
+        "name" : "public-echo",
+        "createdBy" : "admin",
+        "createdOn" : 1446498321119
+      },
+      "Versions" : [ {
+        "ServiceVersionBean" : {
+          "status" : "Published",
+          "endpoint" : "http://localhost:9999/public-echo",
+          "endpointType" : "rest",
+          "endpointProperties" : { },
+          "gateways" : [ {
+            "gatewayId" : "TheGateway"
+          } ],
+          "publicService" : true,
+          "plans" : [ ],
+          "version" : "1.0",
+          "createdBy" : "admin",
+          "createdOn" : 1446498321151,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498334766,
+          "publishedOn" : 1446498372649
+        },
+        "Policies" : [ {
+          "id" : 1446498356861107,
+          "type" : "Service",
+          "organizationId" : "Test",
+          "entityId" : "public-echo",
+          "entityVersion" : "1.0",
+          "name" : "BASIC Authentication Policy",
+          "configuration" : "{\"realm\":\"PublicEcho\",\"forwardIdentityHttpHeader\":\"X-Identity\",\"requireBasicAuth\":true,\"staticIdentity\":{\"identities\":[{\"username\":\"user\",\"password\":\"user\"}]}}",
+          "createdBy" : "admin",
+          "createdOn" : 1446498356857,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498356857,
+          "definition" : {
+            "id" : "BASICAuthenticationPolicy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        }, {
+          "id" : 1446498369610109,
+          "type" : "Service",
+          "organizationId" : "Test",
+          "entityId" : "public-echo",
+          "entityVersion" : "1.0",
+          "name" : "Rate Limiting Policy",
+          "configuration" : "{\"limit\":10,\"granularity\":\"Service\",\"period\":\"Minute\"}",
+          "createdBy" : "admin",
+          "createdOn" : 1446498369606,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446498369606,
+          "definition" : {
+            "id" : "RateLimitingPolicy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 2
+        } ]
+      } ]
+    } ],
+    "Apps" : [ {
+      "ApplicationBean" : {
+        "id" : "test-app-1",
+        "name" : "test-app-1",
+        "createdBy" : "admin",
+        "createdOn" : 1446499111545
+      },
+      "Versions" : [ {
+        "ApplicationVersionBean" : {
+          "status" : "Registered",
+          "version" : "1.0",
+          "createdBy" : "admin",
+          "createdOn" : 1446499111561,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446499121604,
+          "publishedOn" : 1446499139674
+        },
+        "Policies" : [ {
+          "id" : 1446499136775138,
+          "type" : "Application",
+          "organizationId" : "Test",
+          "entityId" : "test-app-1",
+          "entityVersion" : "1.0",
+          "name" : "Transformation Policy",
+          "configuration" : "{\"clientFormat\":\"XML\",\"serverFormat\":\"JSON\"}",
+          "createdBy" : "admin",
+          "createdOn" : 1446499136770,
+          "modifiedBy" : "admin",
+          "modifiedOn" : 1446499136770,
+          "definition" : {
+            "id" : "transformation-policy",
+            "templates" : [ ],
+            "deleted" : false
+          },
+          "orderIndex" : 1
+        } ],
+        "Contracts" : [ {
+          "id" : 1446499121571135,
+          "service" : {
+            "service" : {
+              "organization" : {
+                "id" : "Test"
+              },
+              "id" : "echo"
+            },
+            "endpointProperties" : { },
+            "publicService" : false,
+            "version" : "1.0"
+          },
+          "plan" : {
+            "plan" : {
+              "organization" : {
+                "id" : "Test"
+              },
+              "id" : "Gold"
+            },
+            "version" : "1.0"
+          },
+          "createdBy" : "admin",
+          "createdOn" : 1446499121565,
+          "apikey" : "d811187f-58e4-4ea6-bf68-05f7190255b2"
+        } ]
+      } ]
+    } ],
+    "Audits" : [ {
+      "id" : 1446498331152105,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498331148,
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"http://localhost:9999/public-echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"}]}"
+    }, {
+      "id" : 1446498435413124,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498435413,
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":null,\"after\":\"localhost:9999/echo\"},{\"name\":\"endpointType\",\"before\":null,\"after\":\"rest\"}]}"
+    }, {
+      "id" : 1446498589148126,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498589148,
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"plans\",\"before\":\"\",\"after\":\"Gold:1.0, Silver:1.0\"}]}"
+    }, {
+      "id" : 1446499111557133,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Application",
+      "entityId" : "test-app-1",
+      "createdOn" : 1446499111557,
+      "what" : "Create"
+    }, {
+      "id" : 1446498372659111,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498372659,
+      "what" : "Publish"
+    }, {
+      "id" : 1446498613869129,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498613869,
+      "what" : "Publish"
+    }, {
+      "id" : 1446498419616121,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Silver",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498419616,
+      "what" : "Lock"
+    }, {
+      "id" : 1446499139685140,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Application",
+      "entityId" : "test-app-1",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446499139685,
+      "what" : "Register"
+    }, {
+      "id" : 1446498321166104,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498321166,
+      "what" : "Create"
+    }, {
+      "id" : 1446498334773106,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498334773,
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"publicService\",\"before\":\"false\",\"after\":\"true\"}]}"
+    }, {
+      "id" : 1446498426086122,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "createdOn" : 1446498426086,
+      "what" : "Create"
+    }, {
+      "id" : 1446498426103123,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498426103,
+      "what" : "Create"
+    }, {
+      "id" : 1446498996093130,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Organization",
+      "createdOn" : 1446498996091,
+      "what" : "Revoke",
+      "data" : "{\"userId\":\"admin\",\"roles\":[\"*\"]}"
+    }, {
+      "id" : 1446499136783139,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Application",
+      "entityId" : "test-app-1",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446499136783,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"transformation-policy\"}"
+    }, {
+      "id" : 1446498395105117,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Silver",
+      "createdOn" : 1446498395105,
+      "what" : "Create"
+    }, {
+      "id" : 1446498414069120,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Silver",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498414069,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"RateLimitingPolicy\"}"
+    }, {
+      "id" : 1446498441706125,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498441706,
+      "what" : "Update",
+      "data" : "{\"changes\":[{\"name\":\"endpoint\",\"before\":\"localhost:9999/echo\",\"after\":\"http://localhost:9999/echo\"}]}"
+    }, {
+      "id" : 1446498389049115,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Gold",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498389049,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"RateLimitingPolicy\"}"
+    }, {
+      "id" : 1446498379739112,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Gold",
+      "createdOn" : 1446498379739,
+      "what" : "Create"
+    }, {
+      "id" : 1446498379762113,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Gold",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498379762,
+      "what" : "Create"
+    }, {
+      "id" : 1446498356879108,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498356873,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"BASICAuthenticationPolicy\"}"
+    }, {
+      "id" : 1446499111572134,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Application",
+      "entityId" : "test-app-1",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446499111572,
+      "what" : "Create"
+    }, {
+      "id" : 1446498369619110,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498369619,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"RateLimitingPolicy\"}"
+    }, {
+      "id" : 1446498315963101,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Organization",
+      "createdOn" : 1446498315963,
+      "what" : "Create"
+    }, {
+      "id" : 1446498390256116,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Gold",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498390256,
+      "what" : "Lock"
+    }, {
+      "id" : 1446498321144103,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "public-echo",
+      "createdOn" : 1446498321144,
+      "what" : "Create"
+    }, {
+      "id" : 1446498395125118,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Plan",
+      "entityId" : "Silver",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498395125,
+      "what" : "Create"
+    }, {
+      "id" : 1446498611326128,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446498611326,
+      "what" : "AddPolicy",
+      "data" : "{\"policyDefId\":\"BASICAuthenticationPolicy\"}"
+    }, {
+      "id" : 1446499003699132,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Organization",
+      "createdOn" : 1446499003699,
+      "what" : "Grant",
+      "data" : "{\"userId\":\"admin\",\"roles\":[\"Owner\"]}"
+    }, {
+      "id" : 1446499121592136,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Application",
+      "entityId" : "test-app-1",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446499121586,
+      "what" : "CreateContract",
+      "data" : "{\"appOrgId\":\"Test\",\"appId\":\"test-app-1\",\"appVersion\":\"1.0\",\"serviceOrgId\":\"Test\",\"serviceId\":\"echo\",\"serviceVersion\":\"1.0\",\"planId\":\"Gold\",\"planVersion\":\"1.0\"}"
+    }, {
+      "id" : 1446499121599137,
+      "who" : "admin",
+      "organizationId" : "Test",
+      "entityType" : "Service",
+      "entityId" : "echo",
+      "entityVersion" : "1.0",
+      "createdOn" : 1446499121600,
+      "what" : "CreateContract",
+      "data" : "{\"appOrgId\":\"Test\",\"appId\":\"test-app-1\",\"appVersion\":\"1.0\",\"serviceOrgId\":\"Test\",\"serviceId\":\"echo\",\"serviceVersion\":\"1.0\",\"planId\":\"Gold\",\"planVersion\":\"1.0\"}"
+    } ]
+  } ]
+}
