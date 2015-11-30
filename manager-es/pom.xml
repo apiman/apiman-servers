@@ -7,45 +7,54 @@
     <version>1.2.0-SNAPSHOT</version>
   </parent>
   <artifactId>apiman-servers-manager-es</artifactId>
+  <packaging>bundle</packaging>
   <dependencies>
     <dependency>
       <groupId>io.apiman</groupId>
       <artifactId>apiman-manager-api-micro</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>4.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.weld</groupId>
+      <artifactId>weld-core</artifactId>
+      <version>2.3.0.Final</version>
+    </dependency>
   </dependencies>
   
   <build>
-    <finalName>apiman-manager-es</finalName>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.2</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <excludes>
-                    <exclude>META-INF/*.SF</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
-                  </excludes>
-                </filter>
-              </filters>
-              <transformers>
-                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>io.apiman.servers.manager_es.Starter</mainClass>
-                </transformer>
-              </transformers>
-            </configuration>
-          </execution>
-        </executions>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>2.3.7</version>
+          <extensions>true</extensions>
+          <executions>
+            <execution>
+              <id>bundle-manifest</id>
+              <phase>process-classes</phase>
+              <goals>
+                <goal>manifest</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <instructions>
+              <Bundle-SymbolicName>apiman-manager</Bundle-SymbolicName>
+              <Bundle-Activator>io.apiman.servers.manager_es.StarterBundle</Bundle-Activator>
+              <Import-Package>
+                io.apiman.manager.api.micro,
+                io.apiman.common.servlet,
+                org.osgi.framework;version="[1.5,2)",
+                org.jboss.weld.environment.servlet;resolution:=optional,
+                org.jboss.jandex,
+                org.jboss.weld.environment.deployment.discovery.jandex
+              </Import-Package>
+            </instructions>
+          </configuration>
       </plugin>
     </plugins>
   </build>

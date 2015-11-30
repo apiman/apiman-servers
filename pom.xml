@@ -377,8 +377,10 @@
 
   <modules>
     <module>gateway-es</module>
-    <module>manager-h2</module>
     <module>manager-es</module>
+    <module>apiman-karaf</module>
+    <module>resteasy-bundle</module>
+    <module>manager-h2</module>
     <module>manager-mysql</module>
     <module>manager-postgres</module>
   </modules>
