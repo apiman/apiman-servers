@@ -37,13 +37,13 @@
     "createdBy" : "admin",
     "createdOn" : 1446498182157,
     "autoGrant" : true,
-    "permissions" : [ "svcAdmin", "svcEdit", "orgAdmin", "planView", "appView", "appEdit", "appAdmin", "planAdmin", "orgEdit", "planEdit", "svcView", "orgView" ]
+    "permissions" : [ "apiAdmin", "apiEdit", "orgAdmin", "planView", "clientView", "clientEdit", "clientAdmin", "planAdmin", "orgEdit", "planEdit", "apiView", "orgView" ]
   } ],
   "PolicyDefinitions" : [ {
     "id" : "RateLimitingPolicy",
     "policyImpl" : "class:io.apiman.gateway.engine.policies.RateLimitingPolicy",
     "name" : "Rate Limiting Policy",
-    "description" : "Enforces rate configurable request rate limits on a service.  This ensures that consumers can't overload a service with too many requests.",
+    "description" : "Enforces rate configurable request rate limits on an API.  This ensures that consumers can't overload an API with too many requests.",
     "icon" : "tachometer",
     "templates" : [ {
       "template" : "Consumers are limited to @{limit} requests per @{granularity} per @{period}."
@@ -79,7 +79,7 @@
     "description" : "Only requests that originate from a specified set of valid IP addresses will be allowed through.",
     "icon" : "thumbs-up",
     "templates" : [ {
-      "template" : "Only requests that originate from the set of @{ipList.size()} configured IP address(es) will be allowed to invoke the managed service."
+      "template" : "Only requests that originate from the set of @{ipList.size()} configured IP address(es) will be allowed to invoke the managed API."
     } ],
     "formType" : "Default",
     "deleted" : false
@@ -101,7 +101,7 @@
     "description" : "Requests that originate from a specified set of valid IP addresses will be denied access.",
     "icon" : "thumbs-down",
     "templates" : [ {
-      "template" : "Requests that originate from the set of @{ipList.size()} configured IP address(es) will be denied access to the managed service."
+      "template" : "Requests that originate from the set of @{ipList.size()} configured IP address(es) will be denied access to the managed API."
     } ],
     "formType" : "Default",
     "deleted" : false
@@ -142,10 +142,10 @@
     "id" : "BASICAuthenticationPolicy",
     "policyImpl" : "class:io.apiman.gateway.engine.policies.BasicAuthenticationPolicy",
     "name" : "BASIC Authentication Policy",
-    "description" : "Enables HTTP BASIC Authentication on a service.  Some configuration required.",
+    "description" : "Enables HTTP BASIC Authentication on an API.  Some configuration required.",
     "icon" : "lock",
     "templates" : [ {
-      "template" : "Access to the service is protected by BASIC Authentication through the '@{realm}' authentication realm.  @if{forwardIdentityHttpHeader != null}Successfully authenticated requests will forward the authenticated identity to the back end service via the '@{forwardIdentityHttpHeader}' custom HTTP header.@end{}"
+      "template" : "Access to the API is protected by BASIC Authentication through the '@{realm}' authentication realm.  @if{forwardIdentityHttpHeader != null}Successfully authenticated requests will forward the authenticated identity to the back end API via the '@{forwardIdentityHttpHeader}' custom HTTP header.@end{}"
     } ],
     "formType" : "Default",
     "deleted" : false
