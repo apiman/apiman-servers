@@ -1,0 +1,6 @@
+jdbcUrl=jdbc:oracle:thin:@{HOST}:1521:{DB}
+username=oracle_user
+password=oracle_pwd
+dataSource.cachePrepStmts=true
+dataSource.prepStmtCacheSize=250
+dataSource.prepStmtCacheSqlLimit=2048

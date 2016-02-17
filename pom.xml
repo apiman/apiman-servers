@@ -71,7 +71,7 @@
     <version.frontend-maven.plugin>0.0.23</version.frontend-maven.plugin>
 
     <!-- Dependency Versions -->
-    <version.org.jboss.logging.jboss-logging>3.1.4.GA</version.org.jboss.logging.jboss-logging>
+    <version.org.jboss.logging.jboss-logging>3.3.0.Final</version.org.jboss.logging.jboss-logging>
   </properties>
 
   <dependencyManagement>
@@ -380,6 +380,7 @@
     <module>manager-h2</module>
     <module>manager-es</module>
     <module>manager-mysql</module>
+    <module>manager-oracle</module>
     <module>manager-postgres</module>
   </modules>
 </project>

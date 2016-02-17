@@ -1,0 +1,35 @@
+# Remote maven repositories to use when looking for plugins.  Comma separated
+# list of URLs.
+apiman.plugins.repositories=http://repository.jboss.org/nexus/content/groups/public/
+apiman-manager.plugins.registries=http://rawgit.com/apiman/apiman-plugin-registry/master/registry.json
+
+# Apiman Manager logging. standard, json or a FQDN implementing IApimanLogger
+apiman-manager.config.logger=standard
+
+apiman.es.protocol=http
+apiman.es.host=localhost
+apiman.es.port=9200
+apiman.es.cluster-name=apiman
+
+# ---------------------------------------------------------------------
+# Some hibernate settings only useful when JPA is the storage.type.
+# ---------------------------------------------------------------------
+apiman.hibernate.connection.datasource=java:/comp/env/jdbc/ApiManagerDS
+apiman.hibernate.dialect=io.apiman.manager.api.jpa.ApimanOracle12Dialect
+apiman.hibernate.hbm2ddl.auto=validate
+
+# API Manager storage settings.
+apiman-manager.storage.type=jpa
+
+# API Manager metrics settings.
+apiman-manager.metrics.type=es
+apiman-manager.metrics.es.protocol=${apiman.es.protocol}
+apiman-manager.metrics.es.host=${apiman.es.host}
+apiman-manager.metrics.es.port=${apiman.es.port}
+apiman-manager.metrics.es.cluster-name=${apiman.es.cluster-name}
+
+
+# API Manager API Catalog
+apiman-manager.api-catalog.type=io.apiman.manager.api.core.catalog.JsonApiCatalog
+apiman-manager.api-catalog.catalog-url=http://rawgit.com/apiman/apiman-api-catalog/master/catalog.json
+
