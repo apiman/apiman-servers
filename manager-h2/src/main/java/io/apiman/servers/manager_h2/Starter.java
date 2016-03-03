@@ -74,7 +74,7 @@ public class Starter {
             connection = ds.getConnection();
             connection.setAutoCommit(true);
             
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM information_schema.tables WHERE table_name = 'client_versions'");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM information_schema.tables WHERE table_name = 'CLIENT_VERSIONS'");
             ResultSet rs = statement.executeQuery();
             if (!rs.next()) {
                 initDB(connection);
