@@ -13,6 +13,14 @@
       <artifactId>apiman-manager-api-micro</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.apiman</groupId>
+      <artifactId>apiman-common-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.apiman</groupId>
+      <artifactId>apiman-distro-data</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
     </dependency>

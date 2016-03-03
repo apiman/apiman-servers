@@ -87,6 +87,16 @@
         <artifactId>apiman-gateway-platforms-war-micro</artifactId>
         <version>${version.apiman}</version>
       </dependency>
+      <dependency>
+        <groupId>io.apiman</groupId>
+        <artifactId>apiman-common-util</artifactId>
+        <version>${version.apiman}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.apiman</groupId>
+        <artifactId>apiman-distro-data</artifactId>
+        <version>${version.apiman}</version>
+      </dependency>
 
       <!-- Third Party Deps -->
       <dependency>
