@@ -207,11 +207,6 @@
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
-          <artifactId>gwt-maven-plugin</artifactId>
-          <version>${version.com.google.gwt}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
           <artifactId>exec-maven-plugin</artifactId>
           <version>${version.exec.plugin}</version>
         </plugin>
@@ -331,14 +326,10 @@
               <directory>${basedir}</directory>
               <includes>
                 <include>www-test/**</include>
-                <include>.gwt/**</include>
-                <include>.errai/**</include>
-                <include>src/main/webapp/.errai/**</include>
                 <include>src/main/webapp/app/**</include>
                 <include>src/main/webapp/WEB-INF/deploy/**</include>
                 <include>src/main/webapp/WEB-INF/lib/**</include>
                 <include>src/main/webapp/WEB-INF/classes/**</include>
-                <include>**/gwt-unitCache/**</include>
                 <include>**/*.JUnit/**</include>
               </includes>
             </fileset>
