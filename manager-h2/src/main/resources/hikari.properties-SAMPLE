@@ -1,6 +1,6 @@
 jdbcUrl=jdbc:h2:/tmp/apiman-h2/apiman-manager-api;MVCC=true
-username=root
-password=mysql
+username=sa
+password=
 dataSource.cachePrepStmts=true
 dataSource.prepStmtCacheSize=250
 dataSource.prepStmtCacheSqlLimit=2048
