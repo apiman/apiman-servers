@@ -1,0 +1,6 @@
+jdbcUrl=jdbc:h2:/tmp/apiman-h2/apiman-gateway;MVCC=true
+username=sa
+password=
+dataSource.cachePrepStmts=true
+dataSource.prepStmtCacheSize=250
+dataSource.prepStmtCacheSqlLimit=2048

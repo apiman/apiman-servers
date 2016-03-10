@@ -1,0 +1,2 @@
+apiman-gateway.registry=io.apiman.gateway.engine.jdbc.JdbcRegistry
+apiman-gateway.registry.datasource.jndi-location=java:/comp/env/jdbc/ApiGatewayDS
