@@ -43,8 +43,8 @@ public class Starter {
             System.setProperty(Users.USERS_FILE_PROP, resource.toString());
         }
         
-        GatewayMicroService microService = new GatewayMicroService();
         loadProperties();
+        GatewayMicroService microService = new GatewayMicroService();
         microService.start();
         microService.join();
     }

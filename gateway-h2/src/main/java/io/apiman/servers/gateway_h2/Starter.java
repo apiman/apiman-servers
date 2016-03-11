@@ -55,11 +55,9 @@ public class Starter {
         if (resource != null) {
             System.setProperty(Users.USERS_FILE_PROP, resource.toString());
         }
-        
         createDataSource();
-        
-        GatewayMicroService microService = new GatewayMicroService();
         loadProperties();
+        GatewayMicroService microService = new GatewayMicroService();
         microService.start();
         microService.join();
     }
