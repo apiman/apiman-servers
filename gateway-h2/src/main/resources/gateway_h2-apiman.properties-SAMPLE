@@ -1,2 +1,17 @@
+apiman.es.protocol=http
+apiman.es.host=localhost
+apiman.es.port=9200
+
+apiman.jdbc.datasource.jndi-location=java:/comp/env/jdbc/ApiGatewayDS
+
 apiman-gateway.registry=io.apiman.gateway.engine.jdbc.JdbcRegistry
 apiman-gateway.registry.datasource.jndi-location=java:/comp/env/jdbc/ApiGatewayDS
+
+apiman-gateway.metrics=io.apiman.gateway.engine.jdbc.JdbcMetrics
+apiman-gateway.metrics.datasource.jndi-location=${apiman.jdbc.datasource.jndi-location}
+apiman-gateway.metrics.queue.size=10
+
+apiman-gateway.initializers=jdbc
+apiman-gateway.initializers.jdbc=io.apiman.gateway.engine.jdbc.JdbcInitializer
+apiman-gateway.initializers.jdbc.datasource.jndi-location=${apiman.jdbc.datasource.jndi-location}
+apiman-gateway.initializers.jdbc.datasource.type=h2
