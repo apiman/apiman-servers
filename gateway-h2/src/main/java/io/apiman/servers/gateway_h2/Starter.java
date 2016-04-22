@@ -15,18 +15,13 @@
  */
 package io.apiman.servers.gateway_h2;
 
-import io.apiman.common.util.ddl.DdlParser;
 import io.apiman.gateway.platforms.war.micro.GatewayMicroService;
 import io.apiman.gateway.platforms.war.micro.Users;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.Properties;
 
 import javax.naming.InitialContext;
@@ -96,25 +91,25 @@ public class Starter {
         HikariConfig config = new HikariConfig("src/main/resources/hikari.properties");
         HikariDataSource ds = new HikariDataSource(config);
         
-        Connection connection = null;
-        try {
-            connection = ds.getConnection();
-            connection.setAutoCommit(true);
-            
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM information_schema.tables WHERE table_name = 'APIS'");
-            ResultSet rs = statement.executeQuery();
-            if (!rs.next()) {
-                initDB(connection);
-            }
-            
-            connection.close();
-        } catch (Exception e1) {
-            if (connection != null) {
-                try { connection.close(); } catch (Exception e) {}
-            }
-            ds.close();
-            throw new RuntimeException(e1);
-        }
+//        Connection connection = null;
+//        try {
+//            connection = ds.getConnection();
+//            connection.setAutoCommit(true);
+//            
+//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM information_schema.tables WHERE table_name = 'APIS'");
+//            ResultSet rs = statement.executeQuery();
+//            if (!rs.next()) {
+//                initDB(connection);
+//            }
+//            
+//            connection.close();
+//        } catch (Exception e1) {
+//            if (connection != null) {
+//                try { connection.close(); } catch (Exception e) {}
+//            }
+//            ds.close();
+//            throw new RuntimeException(e1);
+//        }
         
         try {
             InitialContext ctx = new InitialContext();
@@ -130,22 +125,22 @@ public class Starter {
      * Initialize the DB with the apiman gateway DDL.
      * @param connection
      */
-    private static void initDB(Connection connection) throws Exception {
-        System.out.println("Detected that the DDL has not yet been installed.  Installing the apiman gateway H2 DDL now.");
-        ClassLoader cl = Starter.class.getClassLoader();
-        URL resource = cl.getResource("ddls/apiman-gateway_h2.ddl");
-        int numStatements = 0;
-        try (InputStream is = resource.openStream()) {
-            DdlParser ddlParser = new DdlParser();
-            List<String> statements = ddlParser.parse(is);
-            for (String sql : statements) {
-                PreparedStatement statement = connection.prepareStatement(sql);
-                statement.execute();
-                numStatements++;
-            }
-        }
-        System.out.println("DDL successfully installed.  Total SQL statements run: " + numStatements);
-    }
+//    private static void initDB(Connection connection) throws Exception {
+//        System.out.println("Detected that the DDL has not yet been installed.  Installing the apiman gateway H2 DDL now.");
+//        ClassLoader cl = Starter.class.getClassLoader();
+//        URL resource = cl.getResource("ddls/apiman-gateway_h2.ddl");
+//        int numStatements = 0;
+//        try (InputStream is = resource.openStream()) {
+//            DdlParser ddlParser = new DdlParser();
+//            List<String> statements = ddlParser.parse(is);
+//            for (String sql : statements) {
+//                PreparedStatement statement = connection.prepareStatement(sql);
+//                statement.execute();
+//                numStatements++;
+//            }
+//        }
+//        System.out.println("DDL successfully installed.  Total SQL statements run: " + numStatements);
+//    }
 
     /**
      * Ensure that the given name is bound to a context.
