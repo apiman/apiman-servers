@@ -20,6 +20,7 @@ apiman.hibernate.hbm2ddl.auto=validate
 
 # API Manager storage settings.
 apiman-manager.storage.type=jpa
+apiman-manager.storage.jpa.initialize=true
 
 # API Manager metrics settings.
 apiman-manager.metrics.type=es
