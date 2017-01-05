@@ -4,7 +4,7 @@
 
   <groupId>io.apiman</groupId>
   <artifactId>apiman-servers</artifactId>
-  <version>1.2.8-SNAPSHOT</version>
+  <version>1.2.9-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>apiman-servers</name>
 
@@ -43,7 +43,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
 
-    <version.apiman>1.2.8-SNAPSHOT</version.apiman>
+    <version.apiman>1.2.9-SNAPSHOT</version.apiman>
 
     <!-- Plugin Versions -->
     <version.antrun.plugin>1.7</version.antrun.plugin>
