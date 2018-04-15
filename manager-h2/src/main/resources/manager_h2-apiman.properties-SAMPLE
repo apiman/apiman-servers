@@ -1,7 +1,7 @@
 # Remote maven repositories to use when looking for plugins.  Comma separated
 # list of URLs.
 apiman.plugins.repositories=http://repository.jboss.org/nexus/content/groups/public/
-apiman-manager.plugins.registries=http://rawgit.com/apiman/apiman-plugin-registry/master/registry.json
+apiman-manager.plugins.registries=https://rawgit.com/apiman/apiman-plugin-registry/master/registry.json
 
 # Apiman Manager logging. standard, json or a FQDN implementing IApimanLogger
 apiman-manager.config.logger=standard
@@ -32,5 +32,5 @@ apiman-manager.metrics.es.cluster-name=${apiman.es.cluster-name}
 
 # API Manager Service Catalog
 apiman-manager.service-catalog.type=io.apiman.manager.api.core.catalog.JsonServiceCatalog
-apiman-manager.service-catalog.catalog-url=http://rawgit.com/apiman/apiman-service-catalog/master/catalog.json
+apiman-manager.service-catalog.catalog-url=https://rawgit.com/apiman/apiman-service-catalog/master/catalog.json
 
